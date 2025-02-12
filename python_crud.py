@@ -28,7 +28,11 @@ def read_person(conn, person_id):
     return one_person
 
 def update_person(conn, person_id, person):
-    pass
+    cursor = conn.cursor()
+    cursor.execute("UPDATE person SET firstname = %s, lastname = %s, age = %s WHERE id = %s", (person['firstname'], person['lastname'], person['age'], person_id))
+    conn.commit()
+    cursor.close()
+
 
 def delete_person(conn, person_id):
     pass
@@ -49,6 +53,16 @@ if __name__ == "__main__":
     person_id = 3
     one_person = read_person(conn, person_id)
     print(one_person)
+    #update data by ID
+    person_id = 2
+    person = {
+        'firstname': 'Adrian',
+        'lastname': 'Ar0',
+        'age': 1,
+    }
+    new_person = update_person(conn, person_id, person)
+    print(new_person)
+    print(persons)
 
 
     #print(persons[0][1])
