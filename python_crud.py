@@ -35,7 +35,10 @@ def update_person(conn, person_id, person):
 
 
 def delete_person(conn, person_id):
-    pass
+    cursor = conn.cursor()  
+    cursor.execute("DELETE FROM person WHERE id = %s", (person_id,))
+    conn.commit()
+    cursor.close()
 
 
 if __name__ == "__main__":
@@ -54,17 +57,23 @@ if __name__ == "__main__":
     person_id = 3
     one_person = read_person(conn, person_id)
     print(one_person)
-    
+
     #update data by ID
-    person_id = 2
-    person = {
-        'firstname': 'Adrian',
-        'lastname': 'Ar0',
-        'age': 1,
-    }
-    new_person = update_person(conn, person_id, person)
-    print(new_person)
-    print(persons)
+   # person_id = 2
+   # person = {
+   #     'firstname': 'Adrian',
+   #     'lastname': 'Ar0',
+   #     'age': 1,
+   # }
+    #new_person = update_person(conn, person_id, person)
+    #print(new_person)
+    #print(persons)
+
+    #delete data by ID
+    person_id = 1
+    delete_person(conn, person_id)
+    persons = read_all_persons(conn)
+    print(persons)  
 
 
     #print(persons[0][1])
