@@ -49,10 +49,12 @@ if __name__ == "__main__":
     #create_person(conn, "Adrian", "Aro", 25)
     persons = read_all_persons(conn)
     print(persons)
+
     #select one data by ID
     person_id = 3
     one_person = read_person(conn, person_id)
     print(one_person)
+    
     #update data by ID
     person_id = 2
     person = {
